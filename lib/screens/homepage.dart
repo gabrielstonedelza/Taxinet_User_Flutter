@@ -5,13 +5,14 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:get/get.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:taxinet/screens/profile/profile.dart';
-import 'package:taxinet/screens/wallets.dart';
+import 'package:taxinet/screens/wallet/wallets.dart';
 import '../controllers/login/logincontroller.dart';
 import '../controllers/notifications/notificationcontroller.dart';
 import '../controllers/profile/profilecontroller.dart';
 import '../statics/appcolors.dart';
 import 'dashboard.dart';
 import 'information.dart';
+import 'informations/about_drives.dart';
 import 'notifications.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +32,8 @@ class _HomePageState extends State<HomePage> {
     DashBoard(),
     Notifications(),
     Wallet(),
-    Profile()
+    Profile(),
+    // AboutDrives()
   ];
 
   @override
@@ -101,6 +103,12 @@ class _HomePageState extends State<HomePage> {
             title: const Text("Profile"),
             selectedColor: defaultTextColor1,
           ),
+          //   more information
+          // SalomonBottomBarItem(
+          //   icon: const Icon(Icons.info),
+          //   title: const Text("Info"),
+          //   selectedColor: defaultTextColor1,
+          // ),
         ],
       ),
     );

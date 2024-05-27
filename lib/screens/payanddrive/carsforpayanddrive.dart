@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../../controllers/carsales/carsalescontroller.dart';
 import '../../statics/appcolors.dart';
 import '../../widgets/backbutton.dart';
-import 'car_detail_page.dart';
+import 'rental_detail_page.dart';
 import 'mypayanddriverequests.dart';
 
 class CarsForPayAndDrive extends StatefulWidget {
@@ -37,7 +37,7 @@ class _CarsForPayAndDriveState extends State<CarsForPayAndDrive> {
                   items = controller.allRentalCars[index];
                   return GestureDetector(
                     onTap: () {
-                      Get.to(() => CarDetails(
+                      Get.to(() => RentCarDetails(
                           id: controller.allRentalCars[index]['id']
                               .toString()));
                     },

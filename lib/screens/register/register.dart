@@ -370,7 +370,7 @@ class _RegistrationState extends State<Registration> {
                           "Login",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: defaultTextColor1),
+                              color: defaultTextColor2),
                         ),
                         onPressed: () {
                           Get.to(() => const NewLogin());

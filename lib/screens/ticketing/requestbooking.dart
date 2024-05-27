@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:taxinet/screens/showroom/showroom.dart';
 import 'package:taxinet/widgets/backbutton.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -83,7 +84,7 @@ class _RequestBookingState extends State<RequestBooking> {
           backgroundColor: primaryYellow,
           colorText: defaultTextColor1);
 
-      Get.offAll(() => const HomePage());
+      Get.offAll(() => const Showroom());
     } else {
       if (kDebugMode) {
         print(response.body);

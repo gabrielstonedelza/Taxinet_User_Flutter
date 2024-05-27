@@ -52,13 +52,13 @@ class DriveAndPayController extends GetxController {
         var jsonData = jsonDecode(response.body);
         allMyApprovedRequests = jsonData;
         update();
+        // print(response.body);
       } else {
         if (kDebugMode) {
           print(response.body);
         }
       }
     } catch (e) {
-      // Get.snackbar("Sorry","something happened or please check your internet connection",snackPosition: SnackPosition.BOTTOM);
     } finally {
       isLoading = false;
       update();

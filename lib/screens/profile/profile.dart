@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart' as myGet;
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
@@ -13,6 +12,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import '../../../statics/appcolors.dart';
 import '../../controllers/login/logincontroller.dart';
 import '../../controllers/profile/profilecontroller.dart';
+import '../../widgets/backbutton.dart';
 import 'editprofile.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
@@ -223,7 +223,9 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(title: const Text("Profile")),
+        appBar: AppBar(title: const Text("Profile"),
+            leading: const LeadingButton(),
+        ),
         body: GetBuilder<ProfileController>(builder: (controller) {
       return Padding(
         padding: const EdgeInsets.all(18.0),
@@ -272,23 +274,23 @@ class _ProfileState extends State<Profile> {
               child: Divider(),
             ),
 
-            GetBuilder<LoginController>(builder: (loginController) {
-              return RawMaterialButton(
-                fillColor: defaultYellow,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-                onPressed: () {
-                  loginController.logoutUser(uToken);
-                },
-                child: const Text(
-                  "Log Out",
-                  style: TextStyle(
-                      color: defaultTextColor1,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                ),
-              );
-            })
+            // GetBuilder<LoginController>(builder: (loginController) {
+            //   return RawMaterialButton(
+            //     fillColor: defaultYellow,
+            //     shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(12)),
+            //     onPressed: () {
+            //       loginController.logoutUser(uToken);
+            //     },
+            //     child: const Text(
+            //       "Log Out",
+            //       style: TextStyle(
+            //           color: defaultTextColor1,
+            //           fontWeight: FontWeight.bold,
+            //           fontSize: 20),
+            //     ),
+            //   );
+            // })
           ],
         ),
       );

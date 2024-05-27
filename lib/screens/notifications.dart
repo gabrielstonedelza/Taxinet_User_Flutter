@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:get/get.dart';
+import 'package:taxinet/widgets/backbutton.dart';
 
 import '../../statics/appcolors.dart';
 import '../controllers/notifications/notificationcontroller.dart';
@@ -34,6 +35,10 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Notifications"),
+        leading: const LeadingButton(),
+      ),
         body: GetBuilder<NotificationController>(builder: (controller) {
       return ListView.builder(
         itemCount: controller.allNots != null ? controller.allNots.length : 0,

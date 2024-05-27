@@ -38,8 +38,9 @@ dependencies:
   animate_do:
   get:
   rxdart:
-  permission_handler: 
-
+  permission_handler:
+  flutter_advanced_drawer: ^1.3.6
+  date_count_down: ^3.0.0
   modal_bottom_sheet:
     git:
       url: https://github.com/CoolDude53/modal_bottom_sheet.git

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:taxinet/screens/showroom/showroom.dart';
 
 import '../../screens/homepage.dart';
 import '../../screens/login/loginview.dart';
@@ -36,7 +37,7 @@ class LoginController extends GetxController {
       isLoggingIn = false;
       isUser = true;
       isPosting = false;
-      Get.offAll(() => const HomePage());
+      Get.offAll(() => const Showroom());
     } else {
       Get.snackbar("Sorry 😢", "invalid details",
           duration: const Duration(seconds: 5),

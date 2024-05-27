@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../controllers/payanddrive/payanddrivecontroller.dart';
 import '../../widgets/backbutton.dart';
-import '../payanddrive/car_detail_page.dart';
+import '../payanddrive/rental_detail_page.dart';
 
 class PayAndDriveRequests extends StatefulWidget {
   const PayAndDriveRequests({super.key});
@@ -19,7 +19,9 @@ class _PayAndDriveRequestsState extends State<PayAndDriveRequests> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("My Pay and Requests"),
+          title: const Text(
+            "My Pay and Drive Requests",
+          ),
           leading: const LeadingButton()),
       body: GetBuilder<PayAndDriveController>(builder: (controller) {
         return ListView.builder(
@@ -30,7 +32,7 @@ class _PayAndDriveRequestsState extends State<PayAndDriveRequests> {
               items = controller.allPayAndDriveRequests[index];
               return GestureDetector(
                 onTap: () {
-                  Get.to(() => CarDetails(
+                  Get.to(() => RentCarDetails(
                       id: controller.allPayAndDriveRequests[index]['car']
                           .toString()));
                 },

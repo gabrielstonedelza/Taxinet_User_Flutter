@@ -2,6 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/backbutton.dart';
+import '../drive_and_pay/confirmeddrivandpay.dart';
+import '../drive_and_pay/mydrivandpayrequests.dart';
 import '../payanddrive/mypayanddriverequests.dart';
 import 'confirmedpayanddrive.dart';
 
@@ -17,7 +19,7 @@ class _PayAndDriveComponentState extends State<PayAndDriveComponent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Pay And Drive"), leading: const LeadingButton()),
+          title: const Text("Drive and Pay"), leading: const LeadingButton()),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -28,7 +30,8 @@ class _PayAndDriveComponentState extends State<PayAndDriveComponent> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => const PayAndDriveRequests());
+                    // Get.to(() => const PayAndDriveRequests());
+                    Get.to(() => const DriveAndPayRequests());
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -45,7 +48,7 @@ class _PayAndDriveComponentState extends State<PayAndDriveComponent> {
                                   width: 50, height: 50),
                               const Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text("Pay & Drive",
+                                child: Text("Drive and Pay",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                               ),
@@ -59,7 +62,8 @@ class _PayAndDriveComponentState extends State<PayAndDriveComponent> {
                 const SizedBox(width: 20),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => const PayAndDriveConfirmed());
+                    // Get.to(() => const PayAndDriveConfirmed());
+                    Get.to(() => const ConfirmedDriveAndPay());
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -76,11 +80,11 @@ class _PayAndDriveComponentState extends State<PayAndDriveComponent> {
                                   width: 50, height: 50),
                               const Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text("Pay & Drive",
+                                child: Text("Active",
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold)),
                               ),
-                              const Text("Active",
+                              const Text("Drive and pay",
                                   style: TextStyle(fontWeight: FontWeight.bold))
                             ],
                           ),

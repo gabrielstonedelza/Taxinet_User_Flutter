@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:taxinet/screens/showroom/showroom.dart';
 
 import '../../screens/homepage.dart';
 import '../../screens/login/loginview.dart';
@@ -20,8 +21,8 @@ class MyRegistrationController extends GetxController {
   bool isLoading = false;
   bool isPosting = false;
 
-  registerUser(String uname, String email, String fName, String phoneNumber,
-      String uPassword, String uRePassword) async {
+  Future<void> registerUser(String uname, String email, String fName,
+      String phoneNumber, String uPassword, String uRePassword) async {
     const loginUrl = "https://taxinetghana.xyz/auth/users/";
     final myLogin = Uri.parse(loginUrl);
 
@@ -110,7 +111,7 @@ class MyRegistrationController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: defaultYellow,
           duration: const Duration(seconds: 5));
-      Get.offAll(() => const HomePage());
+      Get.offAll(() => const Showroom());
     } else {
       Get.snackbar("Error 😢", "Something went wrong",
           colorText: Colors.white,

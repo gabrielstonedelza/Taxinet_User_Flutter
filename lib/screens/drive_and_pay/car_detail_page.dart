@@ -7,9 +7,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:taxinet/screens/drive_and_pay/requestdriveandpay.dart';
 
-import '../../statics/appcolors.dart';
 import '../../widgets/backbutton.dart';
 import '../../widgets/loadingui.dart';
+import '../payanddrive/requestpayanddrive.dart';
 
 class CarDetails extends StatefulWidget {
   final id;
@@ -42,6 +42,7 @@ class _CarDetailsState extends State<CarDetails> {
   late String pust_start = "";
   late String reverse_camera = "";
   late String drive_type = "";
+  late String rent_type = "";
   var items;
 
   Future<void> getCarDetails() async {
@@ -56,6 +57,7 @@ class _CarDetailsState extends State<CarDetails> {
       detailId = jsonData['id'].toString();
       name = jsonData['name'];
       price = jsonData['price'];
+      rent_type = jsonData['rent_type'];
       location = jsonData['location'];
       milage = jsonData['millage'].toString();
       engine_type = jsonData['engine_type'];
@@ -116,8 +118,27 @@ class _CarDetailsState extends State<CarDetails> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Car Detail"),
+        title: const Text("Car Details"),
         leading: const LeadingButton(),
+        actions: [
+          // TextButton(
+          //   onPressed: () {
+          //     if (rent_type == "Pay And Drive") {
+          //       Get.to(() => RequestPayAndDrive(
+          //           id: detailId,
+          //           drive_type: drive_type,
+          //           rent_type: rent_type));
+          //     } else {
+          //       Get.to(() => RequestDriveAndPay(
+          //           id: detailId,
+          //           drive_type: drive_type,
+          //           rent_type: rent_type));
+          //     }
+          //   },
+          //   child: const Text("Request Call",
+          //       style: TextStyle(fontWeight: FontWeight.bold)),
+          // )
+        ],
       ),
       body: isLoading
           ? const LoadingUi()
@@ -264,35 +285,38 @@ class _CarDetailsState extends State<CarDetails> {
                       ],
                     ),
                   ),
-                  const Divider(),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8.0, left: 8, right: 8, bottom: 40),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: primaryYellow),
-                      height: size.height * 0.06,
-                      width: size.width * 0.6,
-                      child: RawMaterialButton(
-                        onPressed: () {
-                          Get.to(() => RequestDriveAndPay(
-                              id: detailId, drive_type: drive_type));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                        elevation: 8,
-                        fillColor: primaryYellow,
-                        child: const Text(
-                          "Pick",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: defaultTextColor1),
-                        ),
-                      ),
-                    ),
-                  ),
+                  const SizedBox(
+                    height: 30,
+                  )
+                  // const Divider(),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //       top: 8.0, left: 8, right: 8, bottom: 40),
+                  //   child: Container(
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(16),
+                  //         color: primaryYellow),
+                  //     height: size.height * 0.06,
+                  //     width: size.width * 0.6,
+                  //     child: RawMaterialButton(
+                  //       onPressed: () {
+                  //         Get.to(() => RequestDriveAndPay(
+                  //             id: detailId, drive_type: drive_type));
+                  //       },
+                  //       shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(8)),
+                  //       elevation: 8,
+                  //       fillColor: primaryYellow,
+                  //       child: const Text(
+                  //         "Request More Info",
+                  //         style: TextStyle(
+                  //             fontWeight: FontWeight.bold,
+                  //             fontSize: 20,
+                  //             color: defaultTextColor1),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

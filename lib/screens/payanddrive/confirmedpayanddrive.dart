@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../controllers/payanddrive/payanddrivecontroller.dart';
 import '../../widgets/backbutton.dart';
-import '../payanddrive/car_detail_page.dart';
+import '../payanddrive/rental_detail_page.dart';
 
 class PayAndDriveConfirmed extends StatefulWidget {
   const PayAndDriveConfirmed({super.key});
@@ -19,7 +19,7 @@ class _PayAndDriveConfirmedState extends State<PayAndDriveConfirmed> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("My Pay and Drive Active"),
+          title: const Text("My Active Pay and Drive"),
           leading: const LeadingButton()),
       body: GetBuilder<PayAndDriveController>(builder: (controller) {
         return ListView.builder(
@@ -30,7 +30,7 @@ class _PayAndDriveConfirmedState extends State<PayAndDriveConfirmed> {
               items = controller.allMyApprovedRequests[index];
               return GestureDetector(
                 onTap: () {
-                  Get.to(() => CarDetails(
+                  Get.to(() => RentCarDetails(
                       id: controller.allMyApprovedRequests[index]['car']
                           .toString()));
                 },
@@ -67,6 +67,74 @@ class _PayAndDriveConfirmedState extends State<PayAndDriveConfirmed> {
                           child: Text(items['get_car_name'],
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                          child: Row(
+                            children: [
+                              const Text("Drive Type: ",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  )),
+                              Text(items['get_driver_type'],
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  )),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                          child: Row(
+                            children: [
+                              const Text("Active From: ",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  )),
+                              Text(items['get_pick_up_date'],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.red)),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                          child: Row(
+                            children: [
+                              const Text("Drop-off and Expiration Date: ",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  )),
+                              Text(items['get_drop_off_date'],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.red)),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                          child: Row(
+                            children: [
+                              const Text("Dropped-off: ",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  )),
+                              Text(items['dropped_off'].toString(),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.red)),
+                            ],
+                          ),
                         ),
                       ],
                     ),

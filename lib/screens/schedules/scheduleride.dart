@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:taxinet/screens/showroom/showroom.dart';
 
 import '../../controllers/map/mapcontroller.dart';
 import '../../statics/appcolors.dart';
@@ -125,7 +126,7 @@ class _ScheduleRideState extends State<ScheduleRide> {
         _mapController.pickUpLocation = "";
         _mapController.dropOffLocation = "";
       });
-      Get.offAll(() => const HomePage());
+      Get.offAll(() => const Showroom());
     } else {
       if (kDebugMode) {
         print(response.body);

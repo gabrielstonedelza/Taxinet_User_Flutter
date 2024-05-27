@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const defaultYellow = Color(0xFFffaa00);
+const defaultYellow = Color(0xFFffdd00);
 const primaryYellow = Color(0xFFffb700);
 const secondaryYellow = Color(0xFFffc300);
 const snackColor = Color(0xFFffdd00);

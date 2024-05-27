@@ -161,6 +161,17 @@ class _CarDetailsForSaleState extends State<CarDetailsForSale> {
       appBar: AppBar(
         title: const Text("Car Detail"),
         leading: const LeadingButton(),
+        actions: [
+          isPosting
+              ? const CircularProgressIndicator()
+              : TextButton(
+                  onPressed: () {
+                    _startPosting();
+                    requestToBuy();
+                  },
+                  child: const Text("More Info"),
+                )
+        ],
       ),
       body: isLoading
           ? const LoadingUi()
@@ -300,36 +311,36 @@ class _CarDetailsForSaleState extends State<CarDetailsForSale> {
                     ),
                   ),
                   const Divider(),
-                  isPosting
-                      ? const LoadingUi()
-                      : Padding(
-                          padding: const EdgeInsets.only(
-                              top: 8.0, left: 8, right: 8, bottom: 40),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: primaryYellow),
-                            height: size.height * 0.06,
-                            width: size.width * 0.6,
-                            child: RawMaterialButton(
-                              onPressed: () {
-                                _startPosting();
-                                requestToBuy();
-                              },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              elevation: 8,
-                              fillColor: primaryYellow,
-                              child: const Text(
-                                "Pick",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: defaultTextColor1),
-                              ),
-                            ),
-                          ),
-                        ),
+                  // isPosting
+                  //     ? const LoadingUi()
+                  //     : Padding(
+                  //         padding: const EdgeInsets.only(
+                  //             top: 8.0, left: 8, right: 8, bottom: 40),
+                  //         child: Container(
+                  //           decoration: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(16),
+                  //               color: primaryYellow),
+                  //           height: size.height * 0.06,
+                  //           width: size.width * 0.6,
+                  //           child: RawMaterialButton(
+                  //             onPressed: () {
+                  //               _startPosting();
+                  //               requestToBuy();
+                  //             },
+                  //             shape: RoundedRectangleBorder(
+                  //                 borderRadius: BorderRadius.circular(8)),
+                  //             elevation: 8,
+                  //             fillColor: primaryYellow,
+                  //             child: const Text(
+                  //               "Request More Info",
+                  //               style: TextStyle(
+                  //                   fontWeight: FontWeight.bold,
+                  //                   fontSize: 20,
+                  //                   color: defaultTextColor1),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
                 ],
               ),
             ),

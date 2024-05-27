@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
@@ -8,6 +9,7 @@ import 'package:taxinet/screens/schedules/myschedules.dart';
 import 'package:taxinet/screens/ticketing/booking_component.dart';
 
 import '../controllers/carsales/carsalescontroller.dart';
+import '../controllers/daily_pay_for_drive_pay.dart';
 import '../controllers/deliveries/deliveriescontroller.dart';
 import '../controllers/driveandpay/drivaandpaycontroller.dart';
 import '../controllers/login/logincontroller.dart';
@@ -20,7 +22,6 @@ import '../controllers/profile/profilecontroller.dart';
 import '../controllers/schedulecontroller/schedulecontroller.dart';
 import '../controllers/ticketing/ticketingcontroller.dart';
 import '../controllers/wallet/walletcontroller.dart';
-import '../widgets/mycarouselslider.dart';
 import 'carsforsale/allcarsforsale.dart';
 import 'carsforsale/carsforrent.dart';
 import 'drive_and_pay/driveandpaycomponent.dart';
@@ -47,6 +48,8 @@ class _DashBoardState extends State<DashBoard> {
   final CarSalesController carSalesController = Get.find();
   final DriveAndPayController driveAndPayController = Get.find();
   final PayAndDriveController payAndDriveController = Get.find();
+  final DailyPayController dailyPayController = Get.find();
+  double userWallet = 0.0;
 
   @override
   void initState() {
@@ -59,6 +62,8 @@ class _DashBoardState extends State<DashBoard> {
       username = storage.read("username");
     }
     scheduleTimers();
+    // checkAndPay();
+    userWallet = walletController.myWalletAmount;
   }
 
   void scheduleTimers() {
@@ -84,6 +89,9 @@ class _DashBoardState extends State<DashBoard> {
     payAndDriveController.getAllMyApprovedRequests(uToken);
 
     Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+      if (driveAndPayController.allMyApprovedRequests.isNotEmpty) {
+        checkAndPay();
+      }
       notificationController.getAllTriggeredNotifications(uToken);
       notificationController.getAllUnReadNotifications(uToken);
       notificationController.getAllNotifications(uToken);
@@ -100,6 +108,8 @@ class _DashBoardState extends State<DashBoard> {
       carSalesController.getAllForSale(uToken);
       carSalesController.getAllRequestedCars(uToken);
       carSalesController.getAllApprovedPurchases(uToken);
+      driveAndPayController.getAllMyDriveAndPayRequests(uToken);
+      driveAndPayController.getAllMyApprovedRequests(uToken);
       payAndDriveController.getAllMyPayAndDriveRequests(uToken);
       payAndDriveController.getAllMyApprovedRequests(uToken);
       for (var i in notificationController.triggered) {
@@ -115,6 +125,58 @@ class _DashBoardState extends State<DashBoard> {
         notificationController.unTriggerNotifications(e["id"], uToken);
       }
     });
+  }
+
+  // check if users expiration date is today and then update the approved request to expired and notify the user to drop off the car
+
+  String Api_Key =
+      "o!jd!bi38nicfmu707d6tak_!dkmscxgph5vme3o!gounvm_eniub9z65@#dsf_0";
+
+  Future<void> sendDailyPaymentStatement(
+      String userMessage, String senderId) async {
+    const url =
+        'https://sms.nalosolutions.com/smsbackend/Resl_Nalo/send-message/';
+    String num = walletController.userPhone.replaceFirst("0", '+233');
+    final myLink = Uri.parse(url);
+    final response = await http.post(myLink, headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    }, body: {
+      "key": Api_Key,
+      "msisdn": num,
+      "message": userMessage,
+      "sender_id": senderId,
+    });
+    if (response.statusCode == 200) {
+      //all good
+      if (kDebugMode) {
+        print('Response is: ${response.body}');
+      }
+    } else {
+      if (kDebugMode) {
+        print('There was an issue sending message: ${response.body}');
+      }
+    }
+  }
+
+  void checkAndPay() {
+    DateTime now = DateTime.now();
+
+    double amountAfterPay = userWallet - 300;
+    if (now.hour == 0 && now.minute == 0 && now.second == 0) {
+      if (userWallet < 600) {
+        sendDailyPaymentStatement(
+            "Your daily payment of GH300 couldn't go through because your wallet is less than 600",
+            "Taxinet");
+        sendDailyPaymentStatement(
+            "Your vehicle is locked, please call the admin and make payment to unlock your vehicle.",
+            "Taxinet");
+        sendDailyPaymentStatement("relay,1\%23#", "0244529353");
+      } else {
+        dailyPayController.makeDailyPayment(uToken, amountAfterPay.toString());
+        sendDailyPaymentStatement(
+            "GH300 was deducted from your wallet.", "Taxinet");
+      }
+    }
   }
 
   @override
@@ -136,7 +198,7 @@ class _DashBoardState extends State<DashBoard> {
           child: ListView(
             children: [
               const SizedBox(height: 20),
-              const MyCarouselComponent(),
+              // const MyCarouselComponent(),
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -235,7 +297,7 @@ class _DashBoardState extends State<DashBoard> {
                                         width: 70, height: 70),
                                     const Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text("Rent a Car",
+                                      child: Text("Rental Cars",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                     ),
@@ -305,7 +367,7 @@ class _DashBoardState extends State<DashBoard> {
                                         width: 70, height: 70),
                                     const Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text("Drive & Pay",
+                                      child: Text("Pay & Drive",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                     ),
@@ -336,7 +398,7 @@ class _DashBoardState extends State<DashBoard> {
                                         width: 70, height: 70),
                                     const Padding(
                                       padding: EdgeInsets.all(8.0),
-                                      child: Text("Pay & Driver",
+                                      child: Text("Drive & Pay",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold)),
                                     ),

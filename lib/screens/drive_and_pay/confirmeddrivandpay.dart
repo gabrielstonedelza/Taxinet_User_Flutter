@@ -1,5 +1,5 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 
@@ -7,7 +7,6 @@ import '../../controllers/driveandpay/drivaandpaycontroller.dart';
 import '../../controllers/profile/profilecontroller.dart';
 import '../../statics/appcolors.dart';
 import '../../widgets/backbutton.dart';
-import '../payanddrive/car_detail_page.dart';
 import '../sendsms.dart';
 import 'addinventory.dart';
 
@@ -70,7 +69,7 @@ class _ConfirmedDriveAndPayState extends State<ConfirmedDriveAndPay> {
                           children: [
                             const Padding(
                               padding: EdgeInsets.only(bottom: 8.0),
-                              child: Text("Peroid: ",
+                              child: Text("Period: ",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   )),
@@ -106,64 +105,66 @@ class _ConfirmedDriveAndPayState extends State<ConfirmedDriveAndPay> {
                             ),
                           ],
                         ),
-                        const Divider(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RawMaterialButton(
-                              onPressed: () {
-                                print(profileController.driversTrackerSim);
-                                String driversPhone =
-                                    profileController.phoneNumber;
-                                driversPhone =
-                                    driversPhone.replaceFirst("0", '+233');
-                                // function to lock car
-                                String trackerSim =
-                                    profileController.driversTrackerSim;
-                                trackerSim =
-                                    trackerSim.replaceFirst("0", '+233');
-                                sendSms.sendMySms(driversPhone, "Taxinet",
-                                    "Attention!,your car is locked.");
-                                sendSms.sendMySms(
-                                    trackerSim, "0244529353", "relay,1\%23#");
-                              },
-                              // child: const Text("Send"),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              elevation: 8,
-                              fillColor: buttonColor,
-                              splashColor: primaryYellow,
-                              child: const Text(
-                                "Lock Car",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    color: Colors.white),
-                              ),
-                            ),
-                            RawMaterialButton(
-                              onPressed: () {
-                                Get.to(() => const AddInventory());
-                              },
-                              // child: const Text("Send"),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              elevation: 8,
-                              fillColor: buttonColor,
-                              splashColor: primaryYellow,
-                              child: const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  "Add Inventory",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
+                        // const Divider(),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     RawMaterialButton(
+                        //       onPressed: () {
+                        //         if (kDebugMode) {
+                        //           print(profileController.driversTrackerSim);
+                        //         }
+                        //         String driversPhone =
+                        //             profileController.phoneNumber;
+                        //         driversPhone =
+                        //             driversPhone.replaceFirst("0", '+233');
+                        //         // function to lock car
+                        //         String trackerSim =
+                        //             profileController.driversTrackerSim;
+                        //         trackerSim =
+                        //             trackerSim.replaceFirst("0", '+233');
+                        //         sendSms.sendMySms(driversPhone, "Taxinet",
+                        //             "Attention!,your car is locked.");
+                        //         sendSms.sendMySms(
+                        //             trackerSim, "0244529353", "relay,1\%23#");
+                        //       },
+                        //       // child: const Text("Send"),
+                        //       shape: RoundedRectangleBorder(
+                        //           borderRadius: BorderRadius.circular(8)),
+                        //       elevation: 8,
+                        //       fillColor: buttonColor,
+                        //       splashColor: primaryYellow,
+                        //       child: const Text(
+                        //         "Lock Car",
+                        //         style: TextStyle(
+                        //             fontWeight: FontWeight.bold,
+                        //             fontSize: 15,
+                        //             color: Colors.white),
+                        //       ),
+                        //     ),
+                        //     RawMaterialButton(
+                        //       onPressed: () {
+                        //         Get.to(() => const AddInventory());
+                        //       },
+                        //       // child: const Text("Send"),
+                        //       shape: RoundedRectangleBorder(
+                        //           borderRadius: BorderRadius.circular(8)),
+                        //       elevation: 8,
+                        //       fillColor: buttonColor,
+                        //       splashColor: primaryYellow,
+                        //       child: const Padding(
+                        //         padding: EdgeInsets.all(8.0),
+                        //         child: Text(
+                        //           "Add Inventory",
+                        //           style: TextStyle(
+                        //               fontWeight: FontWeight.bold,
+                        //               fontSize: 15,
+                        //               color: Colors.white),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // )
                       ],
                     ),
                   ),

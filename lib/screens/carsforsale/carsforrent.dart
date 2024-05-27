@@ -1,15 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
-import 'package:taxinet/screens/carsforsale/requeststobuycars.dart';
 
 import '../../controllers/carsales/carsalescontroller.dart';
-import '../../statics/appcolors.dart';
 import '../../widgets/backbutton.dart';
-import '../drive_and_pay/car_detail_page.dart';
-import 'cardetailforsale.dart';
+import '../payanddrive/rental_detail_page.dart';
 
 class AllCarsForRent extends StatefulWidget {
   const AllCarsForRent({super.key});
@@ -38,7 +34,7 @@ class _AllCarsForRentState extends State<AllCarsForRent> {
                   items = controller.allRentalCars[index];
                   return GestureDetector(
                     onTap: () {
-                      Get.to(() => CarDetails(
+                      Get.to(() => RentCarDetails(
                           id: controller.allRentalCars[index]['id']
                               .toString()));
                     },
@@ -77,76 +73,6 @@ class _AllCarsForRentState extends State<AllCarsForRent> {
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17)),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 8.0, bottom: 8),
-                              child: Text("₵${items['price']}",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16)),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 8.0, bottom: 8),
-                              child: Row(
-                                children: [
-                                  const Icon(FontAwesomeIcons.gaugeSimpleHigh),
-                                  const SizedBox(width: 10),
-                                  Text(items['millage'].toString(),
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 8.0, bottom: 8),
-                              child: Row(
-                                children: [
-                                  const Icon(FontAwesomeIcons.locationPin),
-                                  const SizedBox(width: 10),
-                                  Text(items['location'],
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 8.0, bottom: 8),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Row(
-                                    children: [
-                                      Icon(FontAwesomeIcons.carRear),
-                                      SizedBox(width: 10),
-                                      Text("Foreign Use",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
-                                    ],
-                                  ),
-                                  Text(items['rent_type'],
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.redAccent))
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 8.0, bottom: 8),
-                              child: Row(
-                                children: [
-                                  const Icon(FontAwesomeIcons.carSide),
-                                  const SizedBox(width: 10),
-                                  Text(items['drive_type'],
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
                             ),
                           ],
                         ),

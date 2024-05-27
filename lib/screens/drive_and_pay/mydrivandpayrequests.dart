@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../controllers/driveandpay/drivaandpaycontroller.dart';
 import '../../widgets/backbutton.dart';
-import '../payanddrive/car_detail_page.dart';
+import '../payanddrive/rental_detail_page.dart';
 
 class DriveAndPayRequests extends StatefulWidget {
   const DriveAndPayRequests({super.key});
@@ -31,7 +31,7 @@ class _DriveAndPayRequestsState extends State<DriveAndPayRequests> {
               items = controller.allDriveAndPayRequests[index];
               return GestureDetector(
                 onTap: () {
-                  Get.to(() => CarDetails(
+                  Get.to(() => RentCarDetails(
                       id: controller.allDriveAndPayRequests[index]['car']
                           .toString()));
                 },

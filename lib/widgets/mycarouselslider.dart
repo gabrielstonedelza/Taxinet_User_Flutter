@@ -13,7 +13,7 @@ class MyCarouselComponent extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 image: const DecorationImage(
                     image: NetworkImage(
-                        "https://taxinetghana.xyz/media/cars_initial_pics/Lexus-TX-2024-1280-01.jpg"),
+                        "https://taxinetghana.xyz/media/cars_initial_pics/Toyota-Yaris-2017-1280-02.jpg"),
                     fit: BoxFit.cover)),
           ),
           Container(
@@ -21,7 +21,7 @@ class MyCarouselComponent extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 image: const DecorationImage(
                     image: NetworkImage(
-                        "https://taxinetghana.xyz/media/cars_initial_pics/BMW-iX1_eDrive20-2024-1280-01.jpg"),
+                        "https://taxinetghana.xyz/media/cars_initial_pics/Hyundai-Elantra-2024-1280-02.jpg"),
                     fit: BoxFit.cover)),
           ),
           Container(
@@ -29,7 +29,7 @@ class MyCarouselComponent extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 image: const DecorationImage(
                     image: NetworkImage(
-                        "https://taxinetghana.xyz/media/cars_initial_pics/Cadillac-XT4-2024-1280-01.jpg"),
+                        "https://taxinetghana.xyz/media/cars_initial_pics/Mitsubishi-XFC_Concept-2022-1280-04.jpg"),
                     fit: BoxFit.cover)),
           ),
         ],

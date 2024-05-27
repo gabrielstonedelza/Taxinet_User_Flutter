@@ -4,9 +4,12 @@ import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 import 'package:taxinet/screens/homepage.dart';
 import 'package:taxinet/screens/login/loginview.dart';
+import 'package:taxinet/screens/showroom/showroom.dart';
 import 'package:taxinet/statics/appcolors.dart';
+import 'package:taxinet/widgets/splashscreen.dart';
 
 import 'controllers/carsales/carsalescontroller.dart';
+import 'controllers/daily_pay_for_drive_pay.dart';
 import 'controllers/deliveries/deliveriescontroller.dart';
 import 'controllers/driveandpay/drivaandpaycontroller.dart';
 import 'controllers/login/logincontroller.dart';
@@ -39,6 +42,7 @@ void main() async {
   Get.put(RentCarController());
   Get.put(WalletController());
   Get.put(LoginController());
+  Get.put(DailyPayController());
   Get.put(MyRegistrationController());
   LocalNotificationController().initNotification();
   runApp(const MyApp());
@@ -52,27 +56,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
-  final storage = GetStorage();
-  bool hasToken = false;
-  late String uToken = "";
-  final ProfileController profileController = Get.find();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    if (storage.read("token") != null) {
-      uToken = storage.read("token");
-      setState(() {
-        hasToken = true;
-      });
-    } else {
-      setState(() {
-        hasToken = false;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,12 +63,16 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.leftToRight,
       theme: ThemeData(
-          primaryColor: primaryYellow,
+          primaryColor: snackColor,
           appBarTheme: const AppBarTheme(
+            titleTextStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: defaultTextColor2,
+                fontSize: 18),
             elevation: 0,
-            backgroundColor: defaultYellow,
+            backgroundColor: snackColor,
           )),
-      home: hasToken ? const HomePage() : const NewLogin(),
+      home: const SplashScreen(),
     );
   }
 }

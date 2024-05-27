@@ -13,7 +13,7 @@ import '../../widgets/loadingui.dart';
 import '../register/register.dart';
 
 class NewLogin extends StatefulWidget {
-  const NewLogin({Key? key}) : super(key: key);
+  const NewLogin({super.key});
 
   @override
   State<NewLogin> createState() => _NewLoginState();
@@ -230,7 +230,7 @@ class _NewLoginState extends State<NewLogin> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         elevation: 8,
-                        fillColor: buttonColor,
+                        fillColor: defaultYellow,
                         splashColor: primaryYellow,
                         child: const Text(
                           "Login",

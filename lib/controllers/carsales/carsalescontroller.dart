@@ -17,7 +17,7 @@ class CarSalesController extends GetxController {
       isLoading = true;
 
       const profileLink =
-          "https://taxinetghana.xyz/car_sales/get_all_vehicles_for_rent/";
+          "https://taxinetghana.xyz/for_rent/all_cars_for_pay_and_drive/";
       var link = Uri.parse(profileLink);
       http.Response response = await http.get(link, headers: {
         "Content-Type": "application/x-www-form-urlencoded",

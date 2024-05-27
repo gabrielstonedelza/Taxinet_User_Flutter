@@ -13,18 +13,24 @@ import '../homepage.dart';
 class RequestDriveAndPay extends StatefulWidget {
   final id;
   final drive_type;
+  final rent_type;
   const RequestDriveAndPay(
-      {super.key, required this.id, required this.drive_type});
+      {super.key,
+      required this.id,
+      required this.drive_type,
+      required this.rent_type});
 
   @override
-  State<RequestDriveAndPay> createState() =>
-      _RequestDriveAndPayState(id: this.id, drive_type: this.drive_type);
+  State<RequestDriveAndPay> createState() => _RequestDriveAndPayState(
+      id: this.id, drive_type: this.drive_type, rent_type: this.rent_type);
 }
 
 class _RequestDriveAndPayState extends State<RequestDriveAndPay> {
   final id;
   final drive_type;
-  _RequestDriveAndPayState({required this.id, required this.drive_type});
+  final rent_type;
+  _RequestDriveAndPayState(
+      {required this.id, required this.drive_type, required this.rent_type});
 
   var uToken = "";
   final storage = GetStorage();
@@ -34,6 +40,9 @@ class _RequestDriveAndPayState extends State<RequestDriveAndPay> {
   late final TextEditingController pickUpDateController;
   late final TextEditingController dropOffDateController;
   bool isPosting = false;
+  late String deRentType = rent_type;
+  var _currentSelectedDriveType = "Select Drive Type";
+  List driveTypes = ["Select Drive Type", "Self Drive", "With Driver"];
 
   Future<void> requestDriveAndPay() async {
     final requestUrl =
@@ -44,7 +53,8 @@ class _RequestDriveAndPayState extends State<RequestDriveAndPay> {
       'Accept': 'application/json',
       "Authorization": "Token $uToken"
     }, body: {
-      "drive_type": drive_type,
+      "drive_type": _currentSelectedDriveType,
+      "rent_type": rent_type,
       "pick_up_date": pickUpDateController.text,
       "drop_off_date": dropOffDateController.text,
     });
@@ -101,7 +111,7 @@ class _RequestDriveAndPayState extends State<RequestDriveAndPay> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Request Drive And Pay"),
+          title: Text("Request $deRentType"),
           leading: const LeadingButton(),
         ),
         body: ListView(
@@ -116,6 +126,35 @@ class _RequestDriveAndPayState extends State<RequestDriveAndPay> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.grey, width: 1)),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 10.0, right: 10),
+                            child: DropdownButton(
+                              isExpanded: true,
+                              underline: const SizedBox(),
+                              style: const TextStyle(
+                                  color: Colors.black, fontSize: 20),
+                              items: driveTypes.map((dropDownStringItem) {
+                                return DropdownMenuItem(
+                                  value: dropDownStringItem,
+                                  child: Text(dropDownStringItem),
+                                );
+                              }).toList(),
+                              onChanged: (newValueSelected) {
+                                _onDropDownItemSelectedDriveType(
+                                    newValueSelected);
+                              },
+                              value: _currentSelectedDriveType,
+                            ),
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10.0),
                         child: TextFormField(
@@ -148,7 +187,7 @@ class _RequestDriveAndPayState extends State<RequestDriveAndPay> {
                                   });
                                 },
                               ),
-                              labelText: "Pick up date",
+                              labelText: "Tap on icon for pick up date",
                               labelStyle:
                                   const TextStyle(color: defaultTextColor2),
                               focusColor: defaultBlack,
@@ -199,7 +238,7 @@ class _RequestDriveAndPayState extends State<RequestDriveAndPay> {
                                   });
                                 },
                               ),
-                              labelText: "Drop Off date",
+                              labelText: "Tap on icon for Drop Off date",
                               labelStyle:
                                   const TextStyle(color: defaultTextColor2),
                               focusColor: defaultBlack,
@@ -248,7 +287,7 @@ class _RequestDriveAndPayState extends State<RequestDriveAndPay> {
                                 elevation: 8,
                                 fillColor: primaryYellow,
                                 child: const Text(
-                                  "Request",
+                                  "Send",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
@@ -263,5 +302,11 @@ class _RequestDriveAndPayState extends State<RequestDriveAndPay> {
             )
           ],
         ));
+  }
+
+  void _onDropDownItemSelectedDriveType(newValueSelected) {
+    setState(() {
+      _currentSelectedDriveType = newValueSelected;
+    });
   }
 }
